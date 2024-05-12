@@ -43,7 +43,7 @@ const CardGrid = styled(Container)(({ theme }) => ({
 
 const GridContainer = styled(Grid)(({ theme }) => ({
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', // Creates as many columns as can fit, min width of 300px
+  gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', 
   gap: theme.spacing(4),
   padding: theme.spacing(2)
 }));
