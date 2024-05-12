@@ -10,6 +10,8 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import SaveIcon from '@mui/icons-material/Save';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import { kyrgyzstan, issykKul, alaArcha, buranaTower, chuiValley, saryChelek, altynArashan } from './assets/images';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
+import AboutPage from './components/AboutPage';
 
 const MainFeaturesPost = styled(Paper)(({ theme }) => ({
   position: 'relative',
@@ -42,7 +44,7 @@ const CardGrid = styled(Container)(({ theme }) => ({
 
 const GridContainer = styled(Grid)(({ theme }) => ({
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', // Creates as many columns as can fit, min width of 300px
+  gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', 
   gap: theme.spacing(4),
   padding: theme.spacing(2)
 }));
@@ -112,8 +114,10 @@ function App() {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
+  
     setDrawerOpen(open);
   };
+  
 
   const drawerContents = (
     <Box
@@ -127,7 +131,7 @@ function App() {
           <ListItemIcon><HomeIcon /></ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>
-        <ListItem button>
+        <ListItem button component={Link} to="/about">
           <ListItemIcon><InfoIcon /></ListItemIcon>
           <ListItemText primary="About" />
         </ListItem>
@@ -139,9 +143,8 @@ function App() {
     </Box>
   );
 
-
   return (
-    <>
+    <Router>
       <AppBar position="fixed">
         <Container fixed>
           <Toolbar>
@@ -158,13 +161,33 @@ function App() {
               open={drawerOpen}
               onClose={toggleDrawer(false)}
             >
-              {drawerContents}
+              <Box
+                sx={{ width: 250 }}
+                role="presentation"
+                onClick={toggleDrawer(false)}
+                onKeyDown={toggleDrawer(false)}
+              >
+                <List>
+                  <ListItem button component={Link} to="/">
+                    <ListItemIcon><HomeIcon /></ListItemIcon>
+                    <ListItemText primary="Home" />
+                  </ListItem>
+                  <ListItem button component={Link} to="/about">
+                    <ListItemIcon><InfoIcon /></ListItemIcon>
+                    <ListItemText primary="About" />
+                  </ListItem>
+                  <ListItem button>
+                    <ListItemIcon><AccountCircle /></ListItemIcon>
+                    <ListItemText primary="Profile" />
+                  </ListItem>
+                </List>
+              </Box>
             </Drawer>
             <Typography variant="h6" sx={{ flexGrow: 1 }}>
               Travel Blog
             </Typography>
             <Box mr={3}>
-            <Button color="inherit" variant="outlined" onClick={handleLoginClickOpen}>Log in</Button>
+              <Button color="inherit" variant="outlined" onClick={handleLoginClickOpen}>Log in</Button>
               <Dialog open={loginOpen} onClose={handleLoginClose} aria-labelledby='form-dialog-title'>
                 <DialogTitle id='form-dialog-title'>Log In</DialogTitle>
                 <DialogContent>
@@ -177,7 +200,7 @@ function App() {
                   <Button onClick={handleLoginClose} color='primary'>Log in</Button>
                 </DialogActions>
               </Dialog>
-              <Button color="secondary" variant="contained" onClick={handleRegisterClickOpen} sx={{marginLeft: '40px'}}>Sign up</Button>
+              <Button color="secondary" variant="contained" onClick={handleRegisterClickOpen} sx={{ marginLeft: '40px' }}>Sign up</Button>
               <Dialog open={registerOpen} onClose={handleRegisterClose} aria-labelledby='form-dialog-title'>
                 <DialogTitle id='form-dialog-title'>Register</DialogTitle>
                 <DialogContent>
@@ -196,95 +219,103 @@ function App() {
           </Toolbar>
         </Container>
       </AppBar>
-      <main>
-      <MainFeaturesPost style={{ backgroundImage: `url(${kyrgyzstan})` }}>
-          <Container fixed>
-            <Overlay/>
-            <Grid container>
-              <Grid item md={6}>
-                <MainFeaturesPostContent>
-                  <Typography 
-                    component="h1"
-                    variant="h3"
-                    color="inherit"
-                    gutterBottom
-                  >
-                    NomadLand
-                  </Typography>
-                  <Typography 
-                    component="h5"
-                    color="inherit"
-                    paragraph
-                  >
-                    Explore new destinations and uncover hidden gems with our in-depth travel guides and stories.
-                  </Typography>
-                  <Button variant="contained" color="secondary">
-                    Learn more
-                  </Button>
-                </MainFeaturesPostContent>
-              </Grid>
-            </Grid>
-          </Container>
-        </MainFeaturesPost>
-        <Box component="section" sx={{ py: 8 }}>
-          <Container maxWidth="md">
-            <Typography variant='h2' align='center' color='textPrimary' gutterBottom>
-              Travel Blog
-            </Typography>
-            <Typography variant='h5' align='center' color='textSecondary' paragraph>
-              Whether you're exploring historic sites, experiencing nomadic culture, 
-              or simply soaking in the breathtaking scenery, Kyrgyzstan offers a unique 
-              and unforgettable travel experience in the heart of Central Asia.
-            </Typography>
-            <div style={{ textAlign: 'center', marginTop: '40px' }}>
-              <Grid container spacing={5} justifyContent='center'>
-                <Grid item>
-                  <Button variant='contained' color='primary'>Start Now</Button>
-                </Grid>
-                <Grid item>
-                  <Button variant='outlined' color='primary'>Learn More</Button>
-                </Grid>
-              </Grid>
-            </div>
-          </Container>
-          <CardGrid maxWidth="md">
-            <GridContainer>
-              {cardData.map((card) => (
-                <Card key={card.id} sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                  <CardMedia
-                    component="img"
-                    height="200"
-                    image={card.imageUrl}
-                    alt={card.title}
-                  />
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="div">
-                      {card.title}
+
+      <Routes>
+        <Route path="/" element={
+          <>
+            <main>
+              <MainFeaturesPost style={{ backgroundImage: `url(${kyrgyzstan})` }}>
+                  <Container fixed>
+                    <Overlay/>
+                    <Grid container>
+                      <Grid item md={6}>
+                        <MainFeaturesPostContent>
+                          <Typography 
+                            component="h1"
+                            variant="h3"
+                            color="inherit"
+                            gutterBottom
+                          >
+                            NomadLand
+                          </Typography>
+                          <Typography 
+                            component="h5"
+                            color="inherit"
+                            paragraph
+                          >
+                            Explore new destinations and uncover hidden gems with our in-depth travel guides and stories.
+                          </Typography>
+                          <Button variant="contained" color="secondary">
+                            Learn more
+                          </Button>
+                        </MainFeaturesPostContent>
+                      </Grid>
+                    </Grid>
+                  </Container>
+                </MainFeaturesPost>
+                <Box component="section" sx={{ py: 8 }}>
+                  <Container maxWidth="md">
+                    <Typography variant='h2' align='center' color='textPrimary' gutterBottom>
+                      Travel Blog
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {card.description}
+                    <Typography variant='h5' align='center' color='textSecondary' paragraph>
+                      Whether you're exploring historic sites, experiencing nomadic culture, 
+                      or simply soaking in the breathtaking scenery, Kyrgyzstan offers a unique 
+                      and unforgettable travel experience in the heart of Central Asia.
                     </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                      View
-                    </Button>
-                    <Button size="small" color="primary">
-                      Edit
-                    </Button>
-                    <IconButton aria-label="save">
-                      <SaveIcon />
-                    </IconButton>
-                    <IconButton aria-label="share via Telegram">
-                      <TelegramIcon /> 
-                    </IconButton>
-                  </CardActions>
-                </Card>
-              ))}
-            </GridContainer>
-        </CardGrid>
-        </Box>
-      </main>
+                    <div style={{ textAlign: 'center', marginTop: '40px' }}>
+                      <Grid container spacing={5} justifyContent='center'>
+                        <Grid item>
+                          <Button variant='contained' color='primary'>Start Now</Button>
+                        </Grid>
+                        <Grid item>
+                          <Button variant='outlined' color='primary'>Learn More</Button>
+                        </Grid>
+                      </Grid>
+                    </div>
+                  </Container>
+                  <CardGrid maxWidth="md">
+                    <GridContainer>
+                      {cardData.map((card) => (
+                        <Card key={card.id} sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                          <CardMedia
+                            component="img"
+                            height="200"
+                            image={card.imageUrl}
+                            alt={card.title}
+                          />
+                          <CardContent sx={{ flexGrow: 1 }}>
+                            <Typography gutterBottom variant="h5" component="div">
+                              {card.title}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                              {card.description}
+                            </Typography>
+                          </CardContent>
+                          <CardActions>
+                            <Button size="small" color="primary">
+                              View
+                            </Button>
+                            <Button size="small" color="primary">
+                              Edit
+                            </Button>
+                            <IconButton aria-label="save">
+                              <SaveIcon />
+                            </IconButton>
+                            <IconButton aria-label="share via Telegram">
+                              <TelegramIcon /> 
+                            </IconButton>
+                          </CardActions>
+                        </Card>
+                      ))}
+                    </GridContainer>
+                </CardGrid>
+                </Box>
+              </main>
+          </>
+        } />
+        <Route path="/about" element={<AboutPage />} />
+      </Routes>
       <footer>
         <Box component="footer" sx={{ bgcolor: '#5393ff', py: 6, color: 'white' }}>
           <Container maxWidth="lg">
@@ -324,8 +355,9 @@ function App() {
           </Container>
         </Box>
       </footer>
-    </>
+    </Router>
   );
 }
 
 export default App;
+
