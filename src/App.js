@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { AppBar, Container, IconButton, Toolbar, Typography, Box, Button, Paper, Grid, styled, Card, CardMedia, 
          CardContent, CardActions, Link, Dialog, DialogTitle, DialogContent, DialogContentText, 
-         TextField, DialogActions, Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+         TextField, DialogActions, Drawer, List, ListItem, ListItemIcon, useMediaQuery, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu'; 
 import InfoIcon from '@mui/icons-material/Info';
 import HomeIcon from '@mui/icons-material/Home';
@@ -10,6 +10,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import SaveIcon from '@mui/icons-material/Save';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import { kyrgyzstan, issykKul, alaArcha, buranaTower, chuiValley, saryChelek, altynArashan } from './assets/images';
+import { useTheme } from '@mui/material/styles';
 
 const MainFeaturesPost = styled(Paper)(({ theme }) => ({
   position: 'relative',
@@ -114,6 +115,8 @@ function App() {
     }
     setDrawerOpen(open);
   };
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const drawerContents = (
     <Box
@@ -139,20 +142,20 @@ function App() {
     </Box>
   );
 
-
   return (
     <>
       <AppBar position="fixed">
-        <Container fixed>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              onClick={toggleDrawer(true)}
-            >
-              <MenuIcon />
-            </IconButton>
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={toggleDrawer(true)}
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
             <Drawer
               anchor='left'
               open={drawerOpen}
@@ -160,12 +163,12 @@ function App() {
             >
               {drawerContents}
             </Drawer>
-            <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: isMobile ? 'center' : 'inherit' }}>
               Travel Blog
             </Typography>
-            <Box mr={3}>
-            <Button color="inherit" variant="outlined" onClick={handleLoginClickOpen}>Log in</Button>
-              <Dialog open={loginOpen} onClose={handleLoginClose} aria-labelledby='form-dialog-title'>
+            <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
+              <Button color="inherit" variant="outlined" onClick={handleLoginClickOpen} sx={{ mx: 1 }}>Log in</Button>
+              <Dialog open={loginOpen} onClose={handleLoginClose}>
                 <DialogTitle id='form-dialog-title'>Log In</DialogTitle>
                 <DialogContent>
                   <DialogContentText>Log in to see locations</DialogContentText>
@@ -177,8 +180,8 @@ function App() {
                   <Button onClick={handleLoginClose} color='primary'>Log in</Button>
                 </DialogActions>
               </Dialog>
-              <Button color="secondary" variant="contained" onClick={handleRegisterClickOpen} sx={{marginLeft: '40px'}}>Sign up</Button>
-              <Dialog open={registerOpen} onClose={handleRegisterClose} aria-labelledby='form-dialog-title'>
+              <Button color="secondary" variant="contained" onClick={handleRegisterClickOpen} sx={{ mx: 1 }}>Sign up</Button>
+              <Dialog open={registerOpen} onClose={handleRegisterClose}>
                 <DialogTitle id='form-dialog-title'>Register</DialogTitle>
                 <DialogContent>
                   <DialogContentText>Please fill in this form to create an account.</DialogContentText>
