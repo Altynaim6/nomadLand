@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/nomadLand/static/css/main.e6c13ad2.css",
+    "main.js": "/nomadLand/static/js/main.c3912769.js",
+    "static/js/453.bea66239.chunk.js": "/nomadLand/static/js/453.bea66239.chunk.js",
+    "static/media/altyn_arashan.jpg": "/nomadLand/static/media/altyn_arashan.5ded4d80b4dcca28203a.jpg",
+    "static/media/ala_archa.jpg": "/nomadLand/static/media/ala_archa.d1f330d10bc5ae39da33.jpg",
+    "static/media/sary_chelek.jpg": "/nomadLand/static/media/sary_chelek.6a41c559739975e781c6.jpg",
+    "static/media/kyrgyzstan.jpeg": "/nomadLand/static/media/kyrgyzstan.7bd1241e51008861e88c.jpeg",
+    "static/media/chui_valley.jpg": "/nomadLand/static/media/chui_valley.e109b898f984c30c19f6.jpg",
+    "static/media/issyk_kul.jpeg": "/nomadLand/static/media/issyk_kul.bd547dea5663f3d3d1da.jpeg",
+    "static/media/burana_tower.jpg": "/nomadLand/static/media/burana_tower.3b3a9b39baffa1dbc191.jpg",
+    "index.html": "/nomadLand/index.html",
+    "main.e6c13ad2.css.map": "/nomadLand/static/css/main.e6c13ad2.css.map",
+    "main.c3912769.js.map": "/nomadLand/static/js/main.c3912769.js.map",
+    "453.bea66239.chunk.js.map": "/nomadLand/static/js/453.bea66239.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.c3912769.js"
+  ]
+}
