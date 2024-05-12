@@ -2,10 +2,6 @@
 
 Welcome to NomadLand, a travel blog designed to explore the majestic landscapes and rich cultural heritage of Kyrgyzstan. Our platform offers in-depth travel guides, personal stories, and beautiful photo galleries, making it easier for travelers to discover and plan their next adventure in Central Asia.
 
-## Live Demo
-
-Check out the live demo of the project here: [NomadLand Live Demo](https://altynaim6.github.io/nomadLand)
-
 ## Features
 
 NomadLand offers several features to enhance your travel planning:
